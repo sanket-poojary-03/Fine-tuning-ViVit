@@ -53,4 +53,3 @@ def frames_convert_and_create_dataset_dictionary(directory):
         video = read_video_pyav(container=container, indices=indices)
         all_videos.append({'video': video, 'labels': f"phase{i}"})
   return all_videos
-video_dict= frames_convert_and_create_dataset_dictionary("file location")
