@@ -19,7 +19,7 @@ def initalise_model():
  config.id2label = {str(i): c for i, c in enumerate(labels)}
  config.label2id = {c: str(i) for i, c in enumerate(labels)}
  config.num_frames=10
- config.video_size= [32, 224, 224]
+ config.video_size= [10, 224, 224]
 
  model = VivitForVideoClassification.from_pretrained(
    "google/vivit-b-16x2-kinetics400",
