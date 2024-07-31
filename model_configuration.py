@@ -1,17 +1,23 @@
 import numpy as np
 from datasets import load_metric
 from transformers import  VivitConfig,VivitForVideoClassification
+from processing import create_dataset
+from data_handling import frames_convert_and_create_dataset_dictionary
+import torch
+
 metric = load_metric("accuracy")
 def compute_metrics(p):
     return metric.compute(predictions=np.argmax(p.predictions, axis=1), references=p.label_ids)
 
-import torch
 def collate_fn(batch):
     return {
         'pixel_values': torch.stack([(torch.tensor(x['pixel_values']))  for x in batch]),
-        'labels': torch.tensor([x['labels'] for x in batch]),
+        'labels': torch.tensor([x['labels'] for x in batch])}
 
-    }
+
+video_dict= frames_convert_and_create_dataset_dictionary("file location")
+shuffled_dataset = create_dataset(video_dict)
+
 def initalise_model():
  labels = shuffled_dataset.features['labels'].names
  config = VivitConfig.from_pretrained("google/vivit-b-16x2-kinetics400")
