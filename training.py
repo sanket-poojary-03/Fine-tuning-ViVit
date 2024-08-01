@@ -2,6 +2,12 @@ from transformers import TrainingArguments
 from transformers import Trainer, TrainingArguments, AdamW
 from model_configuration import *
 from transformers import Trainer
+from processing import create_dataset
+from data_handling import frames_convert_and_create_dataset_dictionary
+from model_configuration import initialise_model
+video_dict= frames_convert_and_create_dataset_dictionary("file location")
+shuffled_dataset = create_dataset(video_dict)
+model = initialise_model()
 training_args = TrainingArguments(
     output_dir="./results",         
     num_train_epochs=1,             
