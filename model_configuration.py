@@ -31,3 +31,4 @@ def initalise_model():
    "google/vivit-b-16x2-kinetics400",
    ignore_mismatched_sizes=True,
     config=config,).to(device)
+ return model 
